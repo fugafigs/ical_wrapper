@@ -10,8 +10,9 @@ app = flask.Flask(__name__)
 def main():
     def make_allday_event_readable(timeline):
         for e in timeline:
-            e.begin = e.begin.replace(hour=10, tzinfo='Asia/Tokyo')
-            e.end = e.end.replace(hour=19, tzinfo='Asia/Tokyo')
+            if e.all_day:
+                e.begin = e.begin.replace(hour=10, tzinfo='Asia/Tokyo')
+                e.end = e.end.replace(hour=19, tzinfo='Asia/Tokyo')
             yield e
 
     url = flask.request.args.get('url', 'https://calendar.google.com/calendar/ical/ja.japanese%23holiday%40group.v.calendar.google.com/public/basic.ics')
