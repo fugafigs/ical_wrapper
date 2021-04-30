@@ -59,7 +59,10 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def main():
-    return str(ICalWrapper())
+    fetch_urls = flask.request.get('url', '')
+    ical = ICalWrapper(fetch_urls)
+
+    return str(ical)
 
 if __name__ == '__main__':
     app.run()

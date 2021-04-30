@@ -1,7 +1,6 @@
 runtime: python39
 instance_class: F1
 env_variables:
-  FETCH_URLS: "<Set your ical urls>"
   BEGIN_HOUR: 10
   INTERVAL_HOURS: 9
   TIMEZONE: "UTC"
