@@ -38,7 +38,7 @@ class ICalWrapper():
         converted_events = set()
         for event in ical.events:
             if event.all_day:
-                event.begin = event.begin.to(timezone).replace(hour=self.BEGIN_HOUR)
+                event.begin = event.begin.replace(hour=self.BEGIN_HOUR).to(timezone)
                 event.end = event.begin.shift(hours=self.INTERVAL_HOURS)
             converted_events.add(event)
 
@@ -59,7 +59,7 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def main():
-    fetch_urls = flask.request.get('url', '')
+    fetch_urls = flask.request.args.get('url', '')
     ical = ICalWrapper(fetch_urls)
 
     return str(ical)
